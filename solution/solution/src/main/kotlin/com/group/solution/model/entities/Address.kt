@@ -1,5 +1,6 @@
-package com.group.solution.model
+package com.group.solution.model.entities
 
+import com.fasterxml.jackson.annotation.JsonIgnore
 import jakarta.persistence.*
 
 
@@ -10,7 +11,7 @@ class Address (
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
-    val id: Long,
+    val id: Long?=null,
 
     @Column(name = "street", nullable = false)
     var street: String,
@@ -28,6 +29,7 @@ class Address (
     var postalCode: String,
 
     @OneToOne(mappedBy = "address")
-    val user: User,
+    @JsonIgnore
+    var user: User? = null,
 
-)
+    )

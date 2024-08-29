@@ -1,6 +1,6 @@
-package com.group.solution.repository
+package com.group.solution.domain.service.repository
 
-import com.group.solution.model.User
+import com.group.solution.model.entities.User
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.stereotype.Repository
 

@@ -1,6 +1,7 @@
-package com.group.solution.model
+package com.group.solution.model.dto
 
 data class UserData(
+    val id: Long? = null,  // Optional for creating new users, required for updating existing ones.  // Optional for creating new users, required for updating existing ones.
     val name: String,
     val email: String,
     val password: String,
