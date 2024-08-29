@@ -5,15 +5,21 @@ import jakarta.persistence.*
 
 @Entity
 @Table(name = "tb_client")
-class Client {
+class Client(
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
-    open var id: Long? = null
+    val id: Long? = null,
 
     @Column(name = "name", nullable = false)
-    open var name: String? = null
+    var name: String? = null,
 
     @Column(name = "email", nullable = false, unique = true)
-    open var email: String? = null
-}
+    var email: String,
+
+    @Column(name = "cpf_client", nullable = false)
+    val cpf: String,
+
+    @OneToOne
+    val address: Address
+)

@@ -1,6 +1,5 @@
 package com.group.solution.model.entities
 
-import RevenueReport
 import jakarta.persistence.*
 
 @Entity
@@ -30,6 +29,4 @@ class User (
     @JoinColumn(name = "address_id", referencedColumnName = "id")
     var address: Address? =null,
 
-    @OneToMany(mappedBy = "id", cascade = [CascadeType.ALL], fetch = FetchType.LAZY)
-    var revenueReports: List<RevenueReport> = mutableListOf()  // Relacionamento com a entidade RevenueReport
 )
