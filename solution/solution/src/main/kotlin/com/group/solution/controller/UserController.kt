@@ -2,6 +2,7 @@ package com.group.solution.controller
 
 import com.group.solution.domain.service.UserService
 import com.group.solution.model.dto.UserData
+import jakarta.validation.Valid
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import org.springframework.web.util.UriComponentsBuilder
@@ -19,7 +20,7 @@ class UserController(val userService: UserService) {
 
     @PostMapping
     fun create(
-        @RequestBody userData: UserData,
+        @RequestBody @Valid userData: UserData,
         uriComponentsBuilder: UriComponentsBuilder
     ): ResponseEntity<String> {
 
@@ -36,7 +37,7 @@ class UserController(val userService: UserService) {
     }
 
     @DeleteMapping("{id}")
-    fun delete(@PathVariable id: Long): ResponseEntity<Void> {
+    fun delete(@PathVariable id: Long): ResponseEntity<Any> {
         userService.deleteUser(id);
         return ResponseEntity.noContent().build()
     }

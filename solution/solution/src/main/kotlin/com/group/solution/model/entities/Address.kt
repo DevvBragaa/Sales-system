@@ -1,17 +1,14 @@
 package com.group.solution.model.entities
 
-import com.fasterxml.jackson.annotation.JsonIgnore
 import jakarta.persistence.*
-
 
 @Entity
 @Table(name = "tb_address")
-class Address (
-
+class Address(
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
-    val id: Long?=null,
+    val id: Long? = null,
 
     @Column(name = "street", nullable = false)
     var street: String,
@@ -27,9 +24,4 @@ class Address (
 
     @Column(name = "postal_code", nullable = false)
     var postalCode: String,
-
-    @OneToOne(mappedBy = "address")
-    @JsonIgnore
-    var user: User? = null,
-
-    )
+)
