@@ -3,25 +3,25 @@ package com.group.solution.model.entities
 import jakarta.persistence.*
 
 @Entity
-@Table(name = "tb_address")
+@Table(name = "TB_ADDRESS")
 class Address(
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id", nullable = false)
+    @Column(name = "ID", nullable = false)
     val id: Long? = null,
 
-    @Column(name = "street", nullable = false)
+    @Column(name = "STREET", nullable = false)
     var street: String,
 
-    @Column(name = "city", nullable = false)
+    @Column(name = "CITY", nullable = false)
     var city: String,
 
-    @Column(name = "state", nullable = false)
+    @Column(name = "STATE", nullable = false)
     var state: String,
 
-    @Column(name = "country", nullable = false)
+    @Column(name = "COUNTRY", nullable = false)
     var country: String,
 
-    @Column(name = "postal_code", nullable = false)
+    @Column(name = "POSTAL_CODE", nullable = false)
     var postalCode: String,
 )

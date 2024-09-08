@@ -8,7 +8,6 @@ import org.springframework.stereotype.Component
 class UserFactoryDto {
 
     fun createUserData(user: User): UserData {
-
         return UserData(
             id = user.id,
             name = user.name,

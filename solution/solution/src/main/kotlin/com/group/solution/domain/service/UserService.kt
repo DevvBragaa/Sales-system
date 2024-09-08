@@ -4,8 +4,11 @@ import com.group.solution.domain.service.factory.UserFactory
 import com.group.solution.domain.service.repository.UserRepository
 import com.group.solution.exception.ResourceNotFoundException
 import com.group.solution.model.dto.UserData
+import com.group.solution.model.entities.UserDatail
 import com.group.solution.model.factory.UserFactoryDto
 import jakarta.transaction.Transactional
+import org.springframework.security.core.userdetails.UserDetails
+import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.stereotype.Service
 
 
@@ -14,15 +17,13 @@ class UserService(
     val factory: UserFactory,
     val factoryDto: UserFactoryDto,
     val userRepository: UserRepository
-) {
+): UserDetailsService {
 
     @Transactional
     fun createUser(userData: UserData): UserData {
-
         val user = factory.createUser(userData)
         userRepository.save(user)
         val userData = factoryDto.createUserData(user)
-
         return userData
     }
 
@@ -50,5 +51,10 @@ class UserService(
         } else {
             throw NoSuchElementException("User not found")
         }
+    }
+
+    override fun loadUserByUsername(username: String?): UserDetails {
+        val user = userRepository.findByEmail(username) ?:throw RuntimeException()
+        return UserDatail(user)
     }
 }

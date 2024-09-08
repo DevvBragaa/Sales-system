@@ -1,9 +1,10 @@
 package com.group.solution.domain.service.factory
 
-import com.group.solution.model.entities.Address
-import com.group.solution.model.entities.User
 import com.group.solution.model.dto.UserData
-import com.group.solution.model.enums.EnumRole
+import com.group.solution.model.entities.Address
+import com.group.solution.model.entities.Role
+import com.group.solution.model.entities.User
+import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Component
 
 @Component
@@ -11,8 +12,12 @@ class UserFactory(
 
 
 ) {
+    lateinit var  passwordEncoder: PasswordEncoder
+
     fun createUser(userData: UserData): User {
 
+        var role:List<Role> = mutableListOf()
+        role.plus("USER")
         val address = Address(
             id = null,
             street = userData.street,
@@ -21,18 +26,15 @@ class UserFactory(
             country = userData.country,
             postalCode = userData.postalCode,
         )
-
-
         val user = User(
             name = userData.name,
             email = userData.email,
-            password = userData.password,
+            password = passwordEncoder.encode(userData.password),
             cnpj = userData.cnpj,
             occupation = userData.occupation,
-            role = EnumRole.ROLE_USER,
+            role = role,
             address = address // endereço ainda não criado
         )
-
         return user
     }
 

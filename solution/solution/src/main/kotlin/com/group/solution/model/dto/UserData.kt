@@ -1,6 +1,5 @@
 package com.group.solution.model.dto
 
-import com.group.solution.model.enums.EnumRole
 import jakarta.validation.constraints.Email
 import jakarta.validation.constraints.NotBlank
 import jakarta.validation.constraints.Size
