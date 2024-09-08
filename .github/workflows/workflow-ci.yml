@@ -1,4 +1,4 @@
-name: Run SonarQube with Maven
+name: Build with Maven
 
 on:
   push:
@@ -10,6 +10,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v2
 
@@ -20,13 +21,5 @@ jobs:
           distribution: 'temurin'
           cache: maven
 
-      - name: Build with Maven and SonarCloud
-        working-directory: solution/solution
-        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
-          -Dsonar.projectKey=${{ secrets.PROJECT_KEY }} \
-          -Dsonar.organization=${{secrets.ORGANIZATION}} \
-          -Dsonar.host.url=https://sonarcloud.io \
-          -Dsonar.login=${{ secrets.SONAR_TOKEN }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SONARCLOUD_TOKEN: ${{ secrets.SONARCLOUD_TOKEN }}
+      - name: Build with Maven
+        run: mvn -B verify
