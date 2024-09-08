@@ -10,7 +10,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v2
 
@@ -22,6 +21,7 @@ jobs:
           cache: maven
 
       - name: Build with Maven and SonarCloud
+        working-directory: solution/solution
         run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
           -Dsonar.projectKey=${{ secrets.PROJECT_KEY }} \
           -Dsonar.organization=${{secrets.ORGANIZATION}} \
