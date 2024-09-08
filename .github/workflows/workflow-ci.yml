@@ -24,3 +24,15 @@ jobs:
       - name: Build with Maven
         working-directory: solution/solution
         run: mvn -B verify
+
+  sonarCloud:
+    name: SonarCloud
+    runs-on: unbuntu-latest
+    steps:
+      - uses: actions;checkout@v4
+        with:
+          fetch-depth: 0
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarclod-github-action@main
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
