@@ -2,12 +2,13 @@ name: Java CI with Maven
 
 on:
   push:
-    branches: *
+    branches: [ main , develop ]
   pull_request:
-    branches: *
+    branches: [ main , develop ]
 
 jobs:
   build:
+
     runs-on: ubuntu-latest
 
     steps:
@@ -35,7 +36,7 @@ jobs:
           cache: maven
       - name: SonarCloud Scan
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  #
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         working-directory: solution/solution
-        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=DevvBragaa_Sales-system -Dsonar.organization=your-org-key -Dsonar.host.url=https://sonarcloud.io
+        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=DevvBragaa_Sales-system
