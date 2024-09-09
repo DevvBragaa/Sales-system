@@ -31,7 +31,7 @@ class User(
     var address: Address? = null,
 
     @JsonIgnore
-    @ManyToMany( fetch = FetchType.EAGER)
+    @ManyToMany( fetch = FetchType.EAGER, cascade = [CascadeType.ALL])
     @JoinTable(name = "USER_ROLE",
         joinColumns = [JoinColumn(name = "usuario_id")],
         inverseJoinColumns = [JoinColumn(name = "role_id")]

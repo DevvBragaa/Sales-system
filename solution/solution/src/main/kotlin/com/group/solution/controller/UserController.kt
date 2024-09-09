@@ -18,17 +18,6 @@ class UserController(val userService: UserService) {
         return ResponseEntity.ok().body(userDataList)
     }
 
-    @PostMapping
-    fun create(
-        @RequestBody @Valid userData: UserData,
-        uriComponentsBuilder: UriComponentsBuilder
-    ): ResponseEntity<String> {
-
-
-        val dto = userService.createUser(userData)
-        val uri = uriComponentsBuilder.path("/users").buildAndExpand(dto.id).toUri()
-        return ResponseEntity.created(uri).body("Registration completed successfully!!")
-    }
 
     @PutMapping("{id}")
     fun update(@RequestBody userData: UserData, @PathVariable id: Long): ResponseEntity<UserData> {

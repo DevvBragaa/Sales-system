@@ -1,7 +1,7 @@
-package com.group.solution.config
+package com.group.solution.security
 
 import com.fasterxml.jackson.databind.ObjectMapper
-import com.group.solution.model.Credentials
+import com.group.solution.model.dto.Credentials
 import jakarta.servlet.FilterChain
 import jakarta.servlet.http.HttpServletRequest
 import jakarta.servlet.http.HttpServletResponse
@@ -29,8 +29,8 @@ class JWTLoginFilter(
         chain: FilterChain?,
         authResult: Authentication?
     ) {
-        val username = (authResult?.principal as UserDetails).username
-        val token = jwtUtil.generateToken(username)
+        val user = (authResult?.principal as UserDetails)
+        val token = jwtUtil.generateToken(user.username, user.authorities)
         response?.addHeader("Authorization", "Bearer $token")
     }
 }

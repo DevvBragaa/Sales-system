@@ -4,20 +4,19 @@ import com.group.solution.model.dto.UserData
 import com.group.solution.model.entities.Address
 import com.group.solution.model.entities.Role
 import com.group.solution.model.entities.User
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Component
 
 @Component
 class UserFactory(
-
-
+    private val encoder: PasswordEncoder
 ) {
-    lateinit var  passwordEncoder: PasswordEncoder
-
     fun createUser(userData: UserData): User {
 
-        var role:List<Role> = mutableListOf()
-        role.plus("USER")
+        val roles = listOf(Role(
+            id=null,
+            roleName = "USER"))
         val address = Address(
             id = null,
             street = userData.street,
@@ -29,10 +28,10 @@ class UserFactory(
         val user = User(
             name = userData.name,
             email = userData.email,
-            password = passwordEncoder.encode(userData.password),
+            password = encoder.encode(userData.password),
             cnpj = userData.cnpj,
             occupation = userData.occupation,
-            role = role,
+            role = roles,
             address = address // endereço ainda não criado
         )
         return user

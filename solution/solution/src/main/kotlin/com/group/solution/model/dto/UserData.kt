@@ -16,7 +16,7 @@ data class UserData(
     @field:NotBlank
     val password: String,
 
-    @field:NotBlank @field:Size(min = 14, max = 14 ,message = "The CNPJ must have 14 digits")
+    @field:NotBlank
     val cnpj: String,
 
     @field:NotBlank
@@ -35,6 +35,5 @@ data class UserData(
     val country: String,
 
     @field:NotBlank
-    @field:Size(min = 8 , max = 8, message = "The postal code must have 8 digits")
     val postalCode: String,
 )
